@@ -1,0 +1,71 @@
+@import 'leaflet/dist/leaflet.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  background-color: #05070a;
+}
+
+body {
+  @apply text-slate-200 font-sans antialiased;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #0a0e14; }
+::-webkit-scrollbar-thumb { background: #26313f; border-radius: 4px; }
+
+/* Glass panel used for floating dashboard cards over the map */
+.glass-panel {
+  background: rgba(14, 19, 27, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(58, 74, 92, 0.4);
+}
+
+/* Leaflet dark tile tint + popup restyle so the map matches the dashboard */
+.leaflet-container {
+  background: #0a0e14;
+  font-family: inherit;
+}
+
+/* Approximates a dark basemap from plain OpenStreetMap tiles (which are
+   free and need no API key) by inverting lightness and re-tinting the hue
+   back toward neutral, then darkening slightly. Applied via className on
+   the TileLayer in DisasterMap.jsx. */
+.dark-tiles {
+  filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.9) saturate(0.6);
+}
+
+.leaflet-popup-content-wrapper {
+  background: #0e131b;
+  color: #e2e8f0;
+  border: 1px solid #26313f;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+.leaflet-popup-tip { background: #0e131b; }
+.leaflet-popup-content { margin: 12px 14px; }
+.leaflet-container a.leaflet-popup-close-button { color: #94a3b8; }
+
+.leaflet-control-zoom a {
+  background: #131a24 !important;
+  color: #cbd5e1 !important;
+  border-color: #26313f !important;
+}
+.leaflet-control-attribution {
+  background: rgba(10,14,20,0.7) !important;
+  color: #64748b !important;
+}
+.leaflet-control-attribution a { color: #94a3b8 !important; }
+
+/* Small horizontal bar used in exposure meters */
+.exposure-track {
+  @apply w-full h-2.5 rounded-full bg-base-700 overflow-hidden;
+}
+.exposure-fill {
+  @apply h-full rounded-full transition-all duration-500;
+}
